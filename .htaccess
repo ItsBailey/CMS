@@ -1,0 +1,9 @@
+RewriteEngine On
+
+ErrorDocument 404 "<h1>Oeps.</h1><p>Je zult wel niet denken? Wat is dit?!<br />Nou, de pagina die jij opvraagt, kan niet gevonden worden..<br /><br />Klik op het 'Ga terug' knopje in je browser om weer naar de vorige pagina te gaan.</p>"
+
+RewriteRule ^/news/([^/]+)(|/)$ /news.php?id=$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]

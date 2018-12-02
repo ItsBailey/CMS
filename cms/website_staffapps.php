@@ -1,0 +1,40 @@
+<?php
+/**==================================================+
+|| # AcellCMS - Website and Content Management System.
+|+==================================================+
+|| # Copyright © 2018 - WeszDEV. All rights reserved.
+|| # https://weszdev.com
+|+==================================================+
+|| # AcellCMS is free for the whole Retro Community.
+|| # Don't know what you are doing? Quit already!
+|+==================================================**/
+
+// In onderhoud? Boeie, niet in de housekeeping!
+define('MAINTENANCE', FALSE);
+
+// Roep het framework aan.
+require_once '../Main/Framework.php';
+require_once '../Main/Classes/classCMS.php';
+
+// Niet ingelogd? Geen toegang!
+if(!Users::isLogged()) { Core::forcePage($siteLink); exit; }
+
+// Geen housekeeping sessie? Geen toegang!
+if(!Cms::hkSession()) { Core::forcePage($siteLink); }
+
+//..
+$category = isset($_POST['category']) ? $_GET['category'] : 0;
+
+// Basis assigns voor de pagina.
+$varCmsWebsiteStaffapps = array(
+    "siteTitle" => $cmsName."CMS - Website",
+);
+
+// Defineer de pagina assigns.
+$template->assign($varCmsWebsiteStaffapps);
+
+// Maak de pagina.
+$template->draw($cmsTemplate.'_website');
+$template->draw($cmsTemplate.'cmsWebsiteStaffapps');
+
+// page end..
